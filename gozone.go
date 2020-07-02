@@ -139,6 +139,7 @@ const (
 	RecordType_DLV = 32769 // DNSSEC Lookaside Validation
 	// Unassigned	32770-65279
 	// Private use	65280-65534
+	RecordType_type65534 = 65534 // used in signing
 	// Reserved	65535
 )
 
@@ -620,18 +621,20 @@ func parseClass(token string) (RecordClass, error) {
 
 func parseType(token string) (RecordType, error) {
 	switch token {
-	case "A":
+	case "A", "a":
 		return RecordType_A, nil
 	case "NS", "ns":
 		return RecordType_NS, nil
-	case "MD":
+	case "MD", "md":
 		return RecordType_MD, nil
-	case "MF":
+	case "MF", "mf":
 		return RecordType_MF, nil
 	case "CNAME":
 		return RecordType_CNAME, nil
-	case "SOA":
+	case "SOA", "soa":
 		return RecordType_SOA, nil
+	case "TYPE65534", "type65534":
+		return RecordType_type65534, nil
 	case "MB":
 		return RecordType_MB, nil
 	case "MG":
@@ -648,9 +651,9 @@ func parseType(token string) (RecordType, error) {
 		return RecordType_HINFO, nil
 	case "MINFO":
 		return RecordType_MINFO, nil
-	case "MX":
+	case "MX", "mx":
 		return RecordType_MX, nil
-	case "TXT":
+	case "TXT", "txt":
 		return RecordType_TXT, nil
 	case "RP":
 		return RecordType_RP, nil
@@ -674,7 +677,7 @@ func parseType(token string) (RecordType, error) {
 		return RecordType_PX, nil
 	case "GPOS":
 		return RecordType_GPOS, nil
-	case "AAAA":
+	case "AAAA", "aaaa":
 		return RecordType_AAAA, nil
 	case "LOC":
 		return RecordType_LOC, nil
@@ -684,7 +687,7 @@ func parseType(token string) (RecordType, error) {
 		return RecordType_EID, nil
 	case "NIMLOC":
 		return RecordType_NIMLOC, nil
-	case "SRV":
+	case "SRV", "srv":
 		return RecordType_SRV, nil
 	case "ATMA":
 		return RecordType_ATMA, nil
@@ -704,23 +707,23 @@ func parseType(token string) (RecordType, error) {
 		return RecordType_OPT, nil
 	case "APL":
 		return RecordType_APL, nil
-	case "DS":
+	case "DS", "ds":
 		return RecordType_DS, nil
 	case "SSHFP":
 		return RecordType_SSHFP, nil
 	case "IPSECKEY":
 		return RecordType_IPSECKEY, nil
-	case "RRSIG":
+	case "RRSIG", "rrsig":
 		return RecordType_RRSIG, nil
-	case "NSEC":
+	case "NSEC", "nsec":
 		return RecordType_NSEC, nil
-	case "DNSKEY":
+	case "DNSKEY", "dnskey":
 		return RecordType_DNSKEY, nil
 	case "DHCID":
 		return RecordType_DHCID, nil
-	case "NSEC3":
+	case "NSEC3", "nsec3":
 		return RecordType_NSEC3, nil
-	case "NSEC3PARAM":
+	case "NSEC3PARAM", "nsec3param":
 		return RecordType_NSEC3PARAM, nil
 	case "TLSA":
 		return RecordType_TLSA, nil
